@@ -2,7 +2,7 @@
 
 @{
     Layout = "_Layout";
-    ViewBag.Title = "Список услуг";
+    ViewBag.Title = "Наши услуги";
 }
 
 <div class="row justify-content-center my-5">
@@ -14,12 +14,17 @@
     {
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <img src="..." alt="..." class="card-img-top img-thumbnail" style="height: 200px;"> <!-- Изображение услуги -->
                 <div class="card-body">
                     <h5 class="card-title">@item.Name</h5>
                     <p class="card-text">Цена: @item.Price руб.</p>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Подробнее</a>
                 </div>
             </div>
         </div>
     }
 </div>
+
+<!-- Кнопка добавления услуги -->
+<p>
+    <a asp-action="Create" class="btn btn-success">Добавить услугу</a>
+</p>
