@@ -1,0 +1,36 @@
+﻿@model IEnumerable<MassageRoom.Models.Booking>
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Расписание";
+}
+
+<div class="row justify-content-center my-5">
+    <h1 class="display-4">Свободные слоты</h1>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Начало сеанса</th>
+                <th>Конец сеанса</th>
+                <th>Услуга</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model)
+            {
+                <tr>
+                    <td>@booking.StartTime.ToShortDateString()</td>
+                    <td>@booking.EndTime.ToShortDateString()</td>
+                    <td>@booking.Service.Name</td>
+                    <td>
+                        <a class="btn btn-sm btn-outline-info" href="#">Выбрать</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

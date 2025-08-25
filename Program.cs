@@ -9,32 +9,32 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
                          "Server=(localdb)\\mssqllocaldb;Database=MassageRoomDB;Trusted_Connection=True;")
 );
 
-// Add services to the container.
-builder.Services.AddRazorPages();
+// Добавляем поддержку контроллеров MVC
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Код конфигурирования middleware и маршрутов
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
-
-// Configure the HTTP request pipeline.
+// Средства безопасности и перенаправления запросов
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    app.UseHsts(); // Включаем политику строгого транспорта (HTTPS)
 }
 
-app.UseHttpsRedirection();
+// Промежуточные уровни обработки запросов
+app.UseHttpsRedirection(); // Принудительное перенаправление на HTTPS
+app.UseStaticFiles(); // Служит статическими ресурсами (CSS, JS)
 
-app.UseRouting();
+app.UseRouting(); // Маршрутизация запросов
 
-app.UseAuthorization();
+app.UseAuthentication(); // Аутентификация (при наличии)
+app.UseAuthorization(); // Авторизация (при наличии)
 
-app.MapStaticAssets();
-app.MapRazorPages()
-   .WithStaticAssets();
+// Регистрация маршрутов контроллеров
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
+// Запуск приложения
 app.Run();

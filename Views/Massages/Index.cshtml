@@ -1,0 +1,25 @@
+﻿@model IEnumerable<MassageRoom.Models.Service>
+
+@{
+    Layout = "_Layout";
+    ViewBag.Title = "Список услуг";
+}
+
+<div class="row justify-content-center my-5">
+    <h1 class="display-4">Наши услуги</h1>
+</div>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="..." alt="..." class="card-img-top img-thumbnail" style="height: 200px;"> <!-- Изображение услуги -->
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">Цена: @item.Price руб.</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
